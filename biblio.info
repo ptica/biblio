@@ -1,0 +1,5 @@
+name = Biblio Filter
+description = Include Biblio HTML fragments
+package = "Filters"
+dependencies[] = filter
+core = 7.x
