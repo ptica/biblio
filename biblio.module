@@ -95,16 +95,16 @@ function _biblio_filter_settings($form, $form_state, $filter, $format, $defaults
  * biblio with our custom defined string in the settings page.
  */
 function _biblio_filter_process($text, $filter, $format) {
-  return preg_replace_callback('/[biblio](.*)[/biblio]/', '_biblio_filter_cb', $text);
+  return preg_replace_callback('/\[biblio\](.*)\[\/biblio\]/', '_biblio_filter_cb', $text);
 }
 
 function _biblio_filter_cb($matches) {
 	$username = @$matches[1];
 	$dir = isset($filter->settings['biblio_dir']) ? $filter->settings['biblio_dir'] : '/home/zeman/www/biblio';
 	$file = "$dir/$username.html";
-	$biblio = 'Biblio content not available'; // default text
+	$biblio = "Biblio content for '$username' not available"; // default text
 	if (file_exists($file)) {
-		$biblio = readfile($file);
+		$biblio = file_get_contents($file);
 	}
 	return $biblio;
 }
